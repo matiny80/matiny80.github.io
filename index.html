@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وبسایت شخصی | برنامه‌نویس موبایل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* استایل‌های کلی */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(to right, #fdfbfb, #ebedee);
+            color: #333;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* هدر و نویگیشن */
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 0.5rem;
+            color: #ffd700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* بخش هیرو */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary-color);
+            border-right: 4px solid var(--accent-color);
+            padding-right: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* بخش‌های مختلف */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            border: none;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 30px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        /* درباره من */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+            padding: 1rem;
+        }
+        
+        .about-skills {
+            flex: 1;
+            min-width: 300px;
+            padding: 1rem;
+        }
+        
+        .skill {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+        }
+        
+        /* نمونه کارها */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .portfolio-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        /* آموزش‌ها */
+        .tutorials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tutorial-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tutorial-info {
+            padding: 1.5rem;
+        }
+        
+        .tutorial-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* فوتر */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hero, .about-content {
+                flex-direction: column;
+            }
+            
+            .hero-content, .hero-image, .about-text, .about-skills {
+                width: 100%;
+            }
+            
+            .hero-image {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر و نویگیشن -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>برنامه‌نویس موبایل</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">خانه</a></li>
+                    <li><a href="#about">درباره من</a></li>
+                    <li><a href="#portfolio">نمونه کارها</a></li>
+                    <li><a href="#tutorials">آموزش‌ها</a></li>
+                    <li><a href="#contact">تماس با من</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش هیرو -->
+    <section id="home">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>سلام، من یک توسعه‌دهنده اپلیکیشن‌های موبایل هستم</h1>
+                    <p>من در طراحی و توسعه اپلیکیشن‌های موبایل برای پلتفرم‌های iOS و Android تخصص دارم. عاشق خلق تجربیات کاربری زیبا و کارآمد هستم.</p>
+                    <a href="#portfolio" class="btn">مشاهده نمونه کارها</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="برنامه‌نویس موبایل">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- درباره من -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>درباره من</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>من یک توسعه‌دهنده نرم‌افزار با بیش از ۵ سال تجربه در توسعه اپلیکیشن‌های موبایل هستم. من در هر دو پلتفرم iOS و Android تخصص دارم و با زبان‌های برنامه‌نویسی Swift، Kotlin و Java آشنا هستم.</p>
+                    <p>هدف من ایجاد اپلیکیشن‌هایی است که نه تنها از نظر بصری جذاب هستند، بلکه تجربه کاربری بی‌نظیری ارائه می‌دهند. من به دنبال حل مشکلات واقعی کاربران با استفاده از فناوری هستم.</p>
+                    <p>علاوه بر توسعه اپلیکیشن، من علاقه زیادی به یادگیری ماشین و هوش مصنوعی دارم و سعی می‌کنم این فناوری‌ها را در پروژه‌هایم intégrate کنم.</p>
+                </div>
+                <div class="about-skills">
+                    <div class="skill">
+                        <div class="skill-name">iOS Development (Swift)</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Android Development (Kotlin)</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">UI/UX Design</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Cross-Platform (Flutter)</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نمونه کارها -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>نمونه کارها</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80" alt="اپلیکیشن فروشگاهی">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>اپلیکیشن فروشگاه آنلاین</h3>
+                        <p>یک اپلیکیشن خرید آنلاین با قابلیت‌های پیشرفته جستجو، سبد خرید و پرداخت امن</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1620&q=80" alt="اپلیکیشن غذایی">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>سفارش غذا</h3>
+                        <p>اپلیکیشن سفارش غذا با امکان تحویل درب منزل و پیگیری لحظه‌به‌لحظه سفارش</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="اپلیکیشن تناسب اندام">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>تناسب اندام و سلامت</h3>
+                        <p>اپلیکیشن پیگیری فعالیت‌های ورزشی و تغذیه با نمودارهای تحلیلی پیشرفته</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- آموزش‌ها -->
+    <section id="tutorials">
+        <div class="container">
+            <div class="section-title">
+                <h2>آموزش‌ها</h2>
+            </div>
+            <div class="tutorials-list">
+                <div class="tutorial-item">
+                    <div class="tutorial-info">
+                        <h3>آموزش ساخت اولین اپلیکیشن iOS با Swift</h3>
+                        <div class="tutorial-meta">
+                            <span><i class="far fa-clock"></i> ۴ ساعت</span>
+                            <span><i class="far fa-star"></i> سطح: مقدماتی</span>
+                        </div>
+                        <p>در این آموزش قدم‌به‌قدم یاد می‌گیرید که چگونه اولین اپلیکیشن iOS خود را با Swift توسعه دهید.</p>
+                        <a href="#" class="btn">شروع آموزش</a>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-info">
+                        <h3>طراحی رابط کاربری حرفه‌ای برای موبایل</h3>
+                        <div class="tutorial-meta">
+                            <span><i class="far fa-clock"></i> ۶ ساعت</span>
+                            <span><i class="far fa-star"></i> سطح: متوسط</span>
+                        </div>
+                        <p>اصول و تکنیک‌های طراحی UI/UX برای اپلیکیشن‌های موبایل را یاد بگیرید.</p>
+                        <a href="#" class="btn">شروع آموزش</a>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-info">
+                        <h3>آموزش کامل Kotlin برای توسعه Android</h3>
+                        <div class="tutorial-meta">
+                            <span><i class="far fa-clock"></i> ۱۰ ساعت</span>
+                            <span><i class="far fa-star"></i> سطح: پیشرفته</span>
+                        </div>
+                        <p>از پایه تا پیشرفته، زبان Kotlin و نحوه استفاده از آن در توسعه اپلیکیشن‌های Android را بیاموزید.</p>
+                        <a href="#" class="btn">شروع آموزش</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تماس با من -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>تماس با من</h2>
+            </div>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p>اگر پروژه‌ای دارید یا می‌خواهید با من همکاری کنید، خوشحال می‌شوم پیام شما را دریافت کنم.</p>
+            </div>
+            <div style="text-align: center;">
+                <a href="mailto:example@example.com" class="btn">ارسال ایمیل</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© ۲۰۲۳ - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <script>
+        // اسکرول نرم برای لینک‌ها
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // تغییر استایل نویگیشن هنگام اسکرول
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'linear-gradient(to right, #3a3fb8, #7a80e5)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'linear-gradient(to right, var(--primary-color), var(--secondary-color))';
+            }
+        });
+    </script>
+</body>
+</html>
