@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آرشیو نمونه کارها | متین یاخشی زاده</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn','Segoe UI',Tahoma,sans-serif; }
+        :root {
+            --primary-color:#7c5cff; --secondary-color:#19c6d9; --accent-color:#ffb454;
+            --bg-color:#080b16; --text-color:#eef2ff; --muted-color:#aab3ca;
+            --border-color:rgba(255,255,255,.09);
+            --transition:all .35s cubic-bezier(.2,.8,.2,1);
+        }
+        html { scroll-behavior:smooth; }
+        body {
+            background:
+                radial-gradient(circle at 8% 5%,rgba(124,92,255,.18),transparent 28%),
+                radial-gradient(circle at 92% 18%,rgba(25,198,217,.11),transparent 28%),
+                linear-gradient(180deg,#080b16 0%,#0b1020 50%,#080b16 100%);
+            color:var(--text-color); line-height:1.8; padding-top:82px; min-height:100vh;
+        }
+        body::before {
+            content:""; position:fixed; inset:0; pointer-events:none;
+            background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+            background-size:45px 45px; mask-image:linear-gradient(to bottom,black,transparent 80%);
+        }
+        .container { width:min(92%,1180px); margin:0 auto; padding:0 15px; }
+        header {
+            background:rgba(8,11,22,.78); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+            color:white; position:fixed; top:0; width:100%; z-index:1000;
+            border-bottom:1px solid var(--border-color); box-shadow:0 10px 35px rgba(0,0,0,.22); transition:var(--transition);
+        }
+        nav { display:flex; justify-content:space-between; align-items:center; min-height:82px; gap:20px; }
+        .logo { font-size:1.35rem; font-weight:800; display:flex; align-items:center; gap:.65rem; white-space:nowrap; }
+        .logo i { color:var(--secondary-color); filter:drop-shadow(0 0 10px rgba(25,198,217,.45)); }
+        .nav-links { display:flex; list-style:none; gap:.35rem; }
+        .nav-links li { margin:0; }
+        .nav-links a { color:#dce3f7; text-decoration:none; font-weight:500; transition:var(--transition); padding:.6rem .9rem; border-radius:12px; }
+        .nav-links a:hover,.nav-links a.active { color:white; background:rgba(124,92,255,.16); box-shadow:inset 0 0 0 1px rgba(124,92,255,.18); }
+
+        section { padding:4.5rem 0; position:relative; }
+        .page-banner { text-align:center; padding:4rem 0 1rem; }
+        .page-banner h1 {
+            font-size:clamp(2rem,4vw,3.4rem); line-height:1.35; margin-bottom:.8rem; font-weight:800;
+            background:linear-gradient(100deg,#fff 15%,#b9b4ff 55%,#65e7ef);
+            -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+        }
+        .page-banner p { color:var(--muted-color); font-size:1rem; }
+        .portfolio-filters { display:flex; justify-content:center; gap:.65rem; margin:2.3rem 0 1rem; flex-wrap:wrap; }
+        .filter-btn {
+            background:rgba(255,255,255,.035); border:1px solid var(--border-color); color:#cbd3e8;
+            padding:.7rem 1.35rem; border-radius:14px; cursor:pointer; font-weight:600; transition:var(--transition);
+        }
+        .filter-btn:hover,.filter-btn.active {
+            background:linear-gradient(135deg,var(--primary-color),#5b7cff); color:white; border-color:transparent;
+            box-shadow:0 10px 25px rgba(92,81,220,.25); transform:translateY(-2px);
+        }
+        .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.6rem; margin-bottom:3rem; }
+        .portfolio-item {
+            background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+            border:1px solid var(--border-color); border-radius:22px; overflow:hidden;
+            box-shadow:0 18px 45px rgba(0,0,0,.2); transition:var(--transition);
+        }
+        .portfolio-item:hover { transform:translateY(-9px); border-color:rgba(124,92,255,.4); box-shadow:0 28px 60px rgba(0,0,0,.32); }
+        .portfolio-img { height:215px; overflow:hidden; background:#0e1424; }
+        .portfolio-img img { width:100%; height:100%; object-fit:cover; transition:var(--transition); }
+        .portfolio-item:hover .portfolio-img img { transform:scale(1.045); }
+        .portfolio-info { padding:1.55rem; }
+        .portfolio-info h3 { margin-bottom:.55rem; color:#f5f7ff; font-size:1.15rem; }
+        .portfolio-info p { color:var(--muted-color); min-height:55px; margin-bottom:.7rem; font-size:.96rem; }
+        .btn {
+            display:inline-flex; align-items:center; justify-content:center; gap:.4rem;
+            background:linear-gradient(135deg,var(--primary-color),#5b7cff); color:white;
+            padding:.82rem 1.4rem; border-radius:14px; text-decoration:none; font-weight:600;
+            transition:var(--transition); border:1px solid rgba(255,255,255,.1); cursor:pointer;
+            margin-top:1rem; box-shadow:0 12px 30px rgba(92,81,220,.22);
+        }
+        .btn:hover { transform:translateY(-4px); box-shadow:0 18px 40px rgba(92,81,220,.35); filter:brightness(1.08); }
+        .back-home { text-align:center; margin:1rem 0 3rem; }
+        .btn-outline { background:transparent; border:1px solid rgba(25,198,217,.4); color:var(--secondary-color); box-shadow:none; }
+        .btn-outline:hover { background:rgba(25,198,217,.1); color:white; border-color:var(--secondary-color); box-shadow:0 12px 30px rgba(25,198,217,.14); }
+
+        footer { background:#050710; color:white; padding:3rem 0 2rem; text-align:center; border-top:1px solid var(--border-color); }
+        .social-links { margin-bottom:1.5rem; }
+        .social-links a {
+            display:inline-flex; align-items:center; justify-content:center; width:46px; height:46px;
+            color:#cbd3e8; font-size:1.2rem; margin:0 .25rem; border:1px solid var(--border-color);
+            border-radius:14px; background:rgba(255,255,255,.035); transition:var(--transition);
+        }
+        .social-links a:hover { color:white; background:rgba(124,92,255,.18); border-color:rgba(124,92,255,.4); transform:translateY(-4px); }
+        footer p { color:#69748d; margin:0; font-size:.9rem; }
+
+        /* افکت ورود هنگام اسکرول */
+        .scroll-reveal {
+            opacity:0;
+            transform:translateY(45px);
+            transition:opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1);
+        }
+        .scroll-reveal.revealed { opacity:1; transform:translateY(0); }
+        .portfolio-item.scroll-reveal:nth-child(2) { transition-delay:.08s; }
+        .portfolio-item.scroll-reveal:nth-child(3) { transition-delay:.16s; }
+        .portfolio-item.scroll-reveal:nth-child(4) { transition-delay:.24s; }
+        .portfolio-item.scroll-reveal:nth-child(5) { transition-delay:.32s; }
+        .portfolio-item.scroll-reveal:nth-child(6) { transition-delay:.40s; }
+
+        /* خط پیشرفت اسکرول */
+        .scroll-progress {
+            position:fixed; top:0; right:0; height:3px; width:0;
+            z-index:2000; background:linear-gradient(90deg,var(--primary-color),var(--secondary-color),var(--accent-color));
+            box-shadow:0 0 12px rgba(25,198,217,.45); transition:width .08s linear;
+        }
+
+        @media (max-width:850px) {
+            .nav-links { display:none; }
+            nav { justify-content:center; }
+            section { padding:3.5rem 0; }
+            .page-banner { padding-top:3rem; }
+        }
+        @media (max-width:520px) {
+            body { padding-top:72px; } nav { min-height:72px; } .logo { font-size:1.05rem; }
+            .portfolio-info { padding:1.25rem; } .portfolio-img { height:195px; }
+            .filter-btn { padding:.6rem 1rem; }
+        }
+        @media (prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto; }
+            .scroll-reveal { opacity:1; transform:none; transition:none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- هدر و نویگیشن -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>برنامه‌نویس موبایل</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html#home">خانه</a></li>
+                    <li><a href="index.html#about">درباره من</a></li>
+                    <li><a href="portfolio.html" class="active">نمونه کارها</a></li>
+                    <li><a href="index.html#tutorials">آموزش‌ها</a></li>
+                    <li><a href="index.html#contact">تماس با من</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- عنوان صفحه -->
+    <section class="page-banner scroll-reveal">
+        <div class="container">
+            <h1>آرشیو تمامی نمونه کارها</h1>
+            <p>مجموعه کامل پروژه‌های طراحی و توسعه اپلیکیشن‌های موبایل و وب</p>
+            
+            <!-- فیلتر دسته‌بندی -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">همه پروژه‌ها</button>
+                <button class="filter-btn" data-filter="android">اندروید</button>
+                <button class="filter-btn" data-filter="shop">فروشگاهی</button>
+                <button class="filter-btn" data-filter="other">سایر</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- لیست نمونه کارها -->
+    <section>
+        <div class="container">
+            <div class="portfolio-grid">
+
+                <!-- آیتم ۱ -->
+                <div class="portfolio-item scroll-reveal" data-category="shop android">
+                    <div class="portfolio-img">
+                        <img src="elecmake.webp" alt="اپلیکیشن فروشگاهی الکمیک">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>اپلیکیشن فروشگاه الکمیک</h3>
+                        <p>فروشگاه محصولات و تجهیزات الکترونیکی الکمیک</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+
+                <!-- آیتم ۲ -->
+                <div class="portfolio-item scroll-reveal" data-category="shop android">
+                    <div class="portfolio-img">
+                        <img src="pluginyab.webp" alt="اپلیکیشن فروشگاهی پلاگین یاب">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>اپلیکیشن فروشگاه پلاگین یاب</h3>
+                        <p>فروشگاه محصولات و تجهیزات الکترونیکی پلاگین یاب</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+
+                <!-- آیتم ۳ -->
+                <div class="portfolio-item scroll-reveal" data-category="shop">
+                    <div class="portfolio-img">
+                        <img src="nistam.webp" alt="فروشگاه اینترنتی 206 نیستم">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>فروشگاه اینترنتی 206 نیستم</h3>
+                        <p>اپلیکیشن فروشگاه اینترنتی 206 نیستم</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+
+                <!-- آیتم ۴ -->
+                <div class="portfolio-item scroll-reveal" data-category="other android">
+                    <div class="portfolio-img">
+                        <img src="shadensport.webp" alt="اپلیکیشن تناسب اندام">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>فروشگاه شادن اسپرت</h3>
+                        <p>اپلیکیشن پیگیری فعالیت‌های ورزشی فروشگاه شادن اسپرت</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+
+                <!-- آیتم ۵ -->
+                <div class="portfolio-item scroll-reveal" data-category="shop">
+                    <div class="portfolio-img">
+                        <img src="charismagallery.webp" alt="اپلیکیشن فروشگاه اکسسوری کاریزما">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>فروشگاه اکسسوری کاریزما</h3>
+                        <p>فروشگاه اکسسوری کاریزما</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+
+                <!-- نمونه پروژه ۶ (نمونه کار اضافی برای صفحه جدید) -->
+                <div class="portfolio-item scroll-reveal" data-category="android">
+                    <div class="portfolio-img">
+                        <img src="elecmake.webp" alt="پروژه مدیریت رزرو آنلاین">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>اپلیکیشن رزرو آنلاین</h3>
+                        <p>سیستم هوشمند رزرو خدمات با کاتلین و جت‌پک کامپوز</p>
+                        <a href="#" class="btn">جزئیات بیشتر</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- دکمه بازگشت به اصلی -->
+            <div class="back-home">
+                <a href="index.html" class="btn btn-outline"><i class="fas fa-arrow-right"></i> بازگشت به صفحه اصلی</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© ۲۰۲۳ - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <!-- اسکریپت فیلتر دسته‌بندی‌ها -->
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        const header = document.querySelector('header');
+        const progress = document.getElementById('scrollProgress');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    const visible = filter === 'all' ||
+                        item.getAttribute('data-category').includes(filter);
+
+                    if (visible) {
+                        item.style.display = 'block';
+                        requestAnimationFrame(() => item.classList.add('revealed'));
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        function updateScrollUI() {
+            const scrollTop = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const percentage = documentHeight > 0 ? (scrollTop / documentHeight) * 100 : 0;
+
+            progress.style.width = percentage + '%';
+
+            if (scrollTop > 50) {
+                header.style.background = 'rgba(8,11,22,.92)';
+                header.style.boxShadow = '0 14px 40px rgba(0,0,0,.30)';
+            } else {
+                header.style.background = 'rgba(8,11,22,.78)';
+                header.style.boxShadow = '0 10px 35px rgba(0,0,0,.22)';
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollUI, { passive: true });
+        window.addEventListener('resize', updateScrollUI);
+        updateScrollUI();
+    </script>
+</body>
+</html>

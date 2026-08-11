@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متین یاخشی زاده  | برنامه‌نویس موبایل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        :root {
+            --primary-color: #7c5cff;
+            --secondary-color: #19c6d9;
+            --accent-color: #ffb454;
+            --bg-color: #080b16;
+            --surface: #101525;
+            --surface-2: #151c2f;
+            --text-color: #eef2ff;
+            --muted-color: #aab3ca;
+            --border-color: rgba(255,255,255,.09);
+            --transition: all .35s cubic-bezier(.2,.8,.2,1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 10% 10%, rgba(124,92,255,.18), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(25,198,217,.12), transparent 28%),
+                linear-gradient(180deg, #080b16 0%, #0b1020 45%, #080b16 100%);
+            color: var(--text-color);
+            line-height: 1.8;
+            padding-top: 82px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, black, transparent 80%);
+        }
+
+        .container {
+            width: min(92%, 1180px);
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background: rgba(8,11,22,.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            color: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 10px 35px rgba(0,0,0,.22);
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 82px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            white-space: nowrap;
+        }
+
+        .logo i {
+            color: var(--secondary-color);
+            filter: drop-shadow(0 0 10px rgba(25,198,217,.45));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: .35rem;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: #dce3f7;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: .6rem .9rem;
+            border-radius: 12px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+            background: rgba(124,92,255,.16);
+            box-shadow: inset 0 0 0 1px rgba(124,92,255,.18);
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        #home {
+            min-height: calc(100vh - 82px);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1.15;
+            min-width: 300px;
+            padding: 1rem;
+        }
+
+        .hero-content::before {
+            content: "MOBILE DEVELOPER";
+            display: inline-block;
+            color: var(--secondary-color);
+            letter-spacing: 2px;
+            font-size: .78rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding: .35rem .75rem;
+            border: 1px solid rgba(25,198,217,.22);
+            border-radius: 999px;
+            background: rgba(25,198,217,.06);
+        }
+
+        .hero-image {
+            flex: .85;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(124,92,255,.45), rgba(25,198,217,.22));
+            filter: blur(35px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: -1;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            width: 320px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 7px solid rgba(255,255,255,.08);
+            outline: 2px solid rgba(124,92,255,.55);
+            box-shadow: 0 25px 70px rgba(0,0,0,.45);
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.35;
+            margin-bottom: 1.3rem;
+            color: white;
+            font-weight: 800;
+            background: linear-gradient(100deg, #fff 15%, #b9b4ff 55%, #65e7ef);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            margin: 0;
+            color: white;
+            border: none;
+            padding: 0;
+        }
+
+        h3 {
+            color: white;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.02rem;
+            color: var(--muted-color);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), #5b7cff);
+            color: white;
+            padding: .85rem 1.45rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,.1);
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 12px 30px rgba(92,81,220,.22);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(92,81,220,.35);
+            filter: brightness(1.08);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            display: inline-flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .75rem 1.35rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 12px 35px rgba(0,0,0,.16);
+        }
+
+        .section-title h2::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .about-text,
+        .about-skills {
+            background: rgba(255,255,255,.035);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.18);
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+            padding: 2rem;
+        }
+
+        .about-skills {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+        }
+
+        .skill {
+            margin-bottom: 1.45rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: .55rem;
+            color: #e8edff;
+        }
+
+        .skill-bar {
+            height: 9px;
+            background: #20283b;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: inherit;
+            box-shadow: 0 0 14px rgba(25,198,217,.28);
+        }
+
+        .portfolio-grid,
+        .tutorials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .portfolio-item,
+        .tutorial-item {
+            background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(0,0,0,.2);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover,
+        .tutorial-item:hover {
+            transform: translateY(-9px);
+            border-color: rgba(124,92,255,.4);
+            box-shadow: 0 28px 60px rgba(0,0,0,.32);
+        }
+
+        .portfolio-img {
+            height: 215px;
+            overflow: hidden;
+            background: #0e1424;
+        }
+
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.045);
+        }
+
+        .portfolio-info,
+        .tutorial-info {
+            padding: 1.6rem;
+        }
+
+        .portfolio-info h3,
+        .tutorial-info h3 {
+            margin-bottom: .6rem;
+            color: #f5f7ff;
+        }
+
+        .portfolio-info p,
+        .tutorial-info p {
+            min-height: 54px;
+        }
+
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            color: #8994ad;
+            font-size: .86rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .portfolio-more {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        #contact .container > div:nth-child(2) {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: #050710;
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            color: #cbd3e8;
+            font-size: 1.2rem;
+            margin: 0 .25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            background: rgba(255,255,255,.035);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: white;
+            background: rgba(124,92,255,.18);
+            border-color: rgba(124,92,255,.4);
+            transform: translateY(-4px);
+        }
+
+        footer p {
+            color: #69748d;
+            margin: 0;
+            font-size: .9rem;
+        }
+
+        @media (max-width: 850px) {
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero {
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-content,
+            .hero-image,
+            .about-text,
+            .about-skills {
+                width: 100%;
+            }
+
+            .hero-image {
+                margin-top: 1rem;
+            }
+
+            section {
+                padding: 4.5rem 0;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding-top: 72px;
+            }
+
+            nav {
+                min-height: 72px;
+            }
+
+            .logo {
+                font-size: 1.05rem;
+            }
+
+            .hero-image img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-image::before {
+                width: 260px;
+                height: 260px;
+            }
+
+            .about-text,
+            .about-skills,
+            .portfolio-info,
+            .tutorial-info {
+                padding: 1.25rem;
+            }
+
+            .tutorial-meta {
+                flex-direction: column;
+                gap: .2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر و نویگیشن -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>برنامه‌نویس موبایل</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">خانه</a></li>
+                    <li><a href="#about">درباره من</a></li>
+                    <li><a href="#portfolio">نمونه کارها</a></li>
+                    <li><a href="#tutorials">آموزش‌ها</a></li>
+                    <li><a href="#contact">تماس با من</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- بخش هیرو -->
+    <section id="home">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>سلام، من یک توسعه‌دهنده اپلیکیشن‌های موبایل هستم</h1>
+                    <p>من در طراحی و توسعه اپلیکیشن‌های موبایل برای پلتفرم‌های iOS و Android تخصص دارم. عاشق خلق تجربیات کاربری زیبا و کارآمد هستم.</p>
+                    <a href="#portfolio" class="btn">مشاهده نمونه کارها</a>
+                </div>
+                <div class="hero-image">
+                    <img src="matin.webp" alt="برنامه‌نویس موبایل">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- درباره من -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>درباره من</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>من یک توسعه‌دهنده نرم‌افزار با بیش از ۵ سال تجربه در توسعه اپلیکیشن‌های موبایل هستم. من در هر دو پلتفرم iOS و Android تخصص دارم و با زبان‌های برنامه‌نویسی Swift، Kotlin و Java آشنا هستم.</p>
+                    <p>هدف من ایجاد اپلیکیشن‌هایی است که نه تنها از نظر بصری جذاب هستند، بلکه تجربه کاربری بی‌نظیری ارائه می‌دهند. من به دنبال حل مشکلات واقعی کاربران با استفاده از فناوری هستم.</p>
+                    <p>علاوه بر توسعه اپلیکیشن، من علاقه زیادی به یادگیری ماشین و هوش مصنوعی دارم و سعی می‌کنم این فناوری‌ها را در پروژه‌هایم intégrate کنم.</p>
+                </div>
+                <div class="about-skills">
+                    <div class="skill">
+                        <div class="skill-name">iOS Development (Swift)</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Android Development (Kotlin)</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">UI/UX Design</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 55%"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Cross-Platform (Flutter)</div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نمونه کارها -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title"><h2>نمونه کارها</h2>
+</div>
+
+<div class="portfolio-grid">
+    <!-- آیتم ۱ -->
+    <div class="portfolio-item">
+        <div class="portfolio-img">
+            <img src="elecmake.webp" alt="اپلیکیشن فروشگاهی الکمیک">
+        </div>
+        <div class="portfolio-info">
+            <h3>اپلیکیشن فروشگاه الکمیک</h3>
+            <p>فروشگاه محصولات و تجهیزات الکترونیکی الکمیک</p>
+            <a href="#" class="btn">جزئیات بیشتر</a>
+        </div>
+    </div>
+
+    <!-- آیتم ۲ -->
+    <div class="portfolio-item">
+        <div class="portfolio-img">
+            <img src="pluginyab.webp" alt="اپلیکیشن فروشگاهی پلاگین یاب">
+        </div>
+        <div class="portfolio-info">
+            <h3>اپلیکیشن فروشگاه پلاگین یاب</h3>
+            <p>فروشگاه محصولات و تجهیزات الکترونیکی پلاگین یاب</p>
+            <a href="#" class="btn">جزئیات بیشتر</a>
+        </div>
+    </div>
+
+    <!-- آیتم ۳ -->
+    <div class="portfolio-item">
+        <div class="portfolio-img">
+            <img src="nistam.webp" alt="فروشگاه اینترنتی 206 نیستم">
+        </div>
+        <div class="portfolio-info">
+            <h3>فروشگاه اینترنتی 206 نیستم</h3>
+            <p>اپلیکیشن فروشگاه اینترنتی 206 نیستم</p>
+            <a href="#" class="btn">جزئیات بیشتر</a>
+        </div>
+    </div>
+
+    <!-- آیتم ۴ -->
+    <div class="portfolio-item">
+        <div class="portfolio-img">
+            <img src="shadensport.webp" alt="اپلیکیشن تناسب اندام">
+        </div>
+        <div class="portfolio-info">
+            <h3>فروشگاه شادن اسپرت</h3>
+            <p>اپلیکیشن پیگیری فعالیت‌های ورزشی فروشگاه شادن اسپرت</p>
+            <a href="#" class="btn">جزئیات بیشتر</a>
+        </div>
+    </div>
+
+    <!-- آیتم ۵ -->
+    <div class="portfolio-item">
+        <div class="portfolio-img">
+            <img src="charismagallery.webp" alt="اپلیکیشن فروشگاه اکسسوری کاریزما">
+        </div>
+        <div class="portfolio-info">
+            <h3>فروشگاه اکسسوری کاریزما</h3>
+            <p>فروشگاه اکسسوری کاریزما</p>
+            <a href="#" class="btn">جزئیات بیشتر</a>
+        </div>
+    </div>
+</div>
+
+
+               <!-- دکمه هدایت به صفحه تمام نمونه‌کارها -->
+<div class="portfolio-more">
+    <a href="portfolio.html" class="btn btn-primary">مشاهده همه نمونه کارها</a>
+</div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- آموزش‌ها -->
+    <section id="tutorials">
+        <div class="container">
+            <div class="section-title">
+                <h2>آموزش‌ها</h2>
+            </div>
+            <div class="tutorials-list">
+                <div class="tutorial-item">
+                    <div class="tutorial-info">
+                        <h3>آموزش ساخت اولین اپلیکیشن iOS با Swift</h3>
+                        <div class="tutorial-meta">
+                            <span><i class="far fa-clock"></i> ۴ ساعت</span>
+                            <span><i class="far fa-star"></i> سطح: مقدماتی</span>
+                        </div>
+                        <p>در این آموزش قدم‌به‌قدم یاد می‌گیرید که چگونه اولین اپلیکیشن iOS خود را با Swift توسعه دهید.</p>
+                        <a href="#" class="btn">شروع آموزش</a>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-info">
+                        <h3>طراحی رابط کاربری حرفه‌ای برای موبایل</h3>
+                        <div class="tutorial-meta">
+                            <span><i class="far fa-clock"></i> ۶ ساعت</span>
+                            <span><i class="far fa-star"></i> سطح: متوسط</span>
+                        </div>
+                        <p>اصول و تکنیک‌های طراحی UI/UX برای اپلیکیشن‌های موبایل را یاد بگیرید.</p>
+                        <a href="#" class="btn">شروع آموزش</a>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-info">
+                        <h3>آموزش کامل Kotlin برای توسعه Android</h3>
+                        <div class="tutorial-meta">
+                            <span><i class="far fa-clock"></i> ۱۰ ساعت</span>
+                            <span><i class="far fa-star"></i> سطح: پیشرفته</span>
+                        </div>
+                        <p>از پایه تا پیشرفته، زبان Kotlin و نحوه استفاده از آن در توسعه اپلیکیشن‌های Android را بیاموزید.</p>
+                        <a href="#" class="btn">شروع آموزش</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تماس با من -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>تماس با من</h2>
+            </div>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p>اگر پروژه‌ای دارید یا می‌خواهید با من همکاری کنید، خوشحال می‌شوم پیام شما را دریافت کنم.</p>
+            </div>
+            <div style="text-align: center;">
+                <a href="mailto:example@example.com" class="btn">ارسال ایمیل</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <p>© ۲۰۲۳ - تمام حقوق محفوظ است</p>
+        </div>
+    </footer>
+
+    <script>
+        // اسکرول نرم برای لینک‌ها
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // تغییر استایل نویگیشن هنگام اسکرول
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.28)';
+                header.style.background = 'rgba(8, 11, 22, 0.92)';
+            } else {
+                header.style.boxShadow = '0 10px 35px rgba(0,0,0,.22)';
+                header.style.background = 'rgba(8,11,22,.78)';
+            }
+        });
+    </script>
+</body>
+</html>
